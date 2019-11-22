@@ -5,7 +5,7 @@ A huffman encode and decode program implemented in C++.
 ## Requirements
 
 - GNU g++, make
-- CMake version 3.0 or newer
+- CMake version 3.0 or higher
 
 ## Build
 
@@ -14,6 +14,7 @@ Do the following commands:
 ```shell
 $mkdir build && cd build
 $cmake ../ -DCMAKE_BUILD_TYPE=Release
+#if you'd like to debug this program,please set TYPE as "Debug"
 $make
 ```
 
