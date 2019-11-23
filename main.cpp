@@ -1,9 +1,8 @@
 /*
-*Version 0.2
+*Version 0.3
 *by Mx, Nov. 23
 */
 
-#include "include/tree.h"
 #include "include/encode.h"
 #include "include/decode.h"
 
@@ -11,11 +10,12 @@ int main(int argc, char *argv[])
 {
     if (argc == 4)
     {
-        std::string fileName = argv[2];
-        std::string wrtName = argv[3];
-        if (argv[1] == "comp")
-            Encode(fileName, wrtName);
-        else if (argv[1] == "extr")
+        std::string fileName(argv[2]);
+        std::string wrtName(argv[3]);
+        std::string parameter(argv[1]);
+        if (parameter == "comp")
+            Encode(fileName, wrtName);//报错
+        else if (parameter == "extr")
             Decode(fileName, wrtName);
     }
     else

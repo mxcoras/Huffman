@@ -7,6 +7,7 @@
 #include <fstream>
 #include <algorithm>
 #include <cstdlib>
+#include <cstring>
 #include <vector>
 #include <bitset>
 #include <map>

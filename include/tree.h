@@ -30,18 +30,21 @@ class HuffmanTree
 private:
     //哈夫曼树的根节点
     HuffTreeNode *root;
+    std::map<char, std::string> chCode;
 
 public:
     //哈夫曼树的构造函数
     HuffmanTree(std::map<char, int> chFreq);
     //哈夫曼树的析构函数
     ~HuffmanTree();
+    //返回字符集
+    std::map<char, std::string> getChcode();
     //由map中各字符和其对应的频率生成哈夫曼树
     void Generate(std::map<char, int> &chFreq);
     //删除哈夫曼树
     void Clear();
     //通过先序遍历，生成哈夫曼编码字符集
-    std::map<char, std::string> CharSet();
+    void CharSet();
     //哈夫曼树的先序遍历
     void PreOrder(HuffTreeNode *Node, std::map<char, std::string> &chCode, std::string &tmp, bool isLeft);
 };

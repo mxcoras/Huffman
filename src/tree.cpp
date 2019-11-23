@@ -9,10 +9,15 @@ bool cmpWeight(HuffTreeNode *data1, HuffTreeNode *data2)
 HuffmanTree::HuffmanTree(std::map<char, int> chFreq)
 {
     Generate(chFreq);
+    CharSet();
 }
 
 HuffmanTree::~HuffmanTree()
 {
+}
+
+std::map<char, std::string> HuffmanTree::getChcode(){
+    return chCode;
 }
 
 void HuffmanTree::Generate(std::map<char, int> &chFreq)
@@ -44,12 +49,10 @@ void HuffmanTree::Clear()
 {
 }
 
-std::map<char, std::string> HuffmanTree::CharSet()
+void HuffmanTree::CharSet()
 {
-    std::map<char, std::string> chCode;
     std::string tmp;//暂存的编码
     PreOrder(root, chCode, tmp, true);
-    return chCode;
 }
 
 void HuffmanTree::PreOrder(HuffTreeNode *Node, std::map<char, std::string> &chCode, std::string &tmp, bool isLeft)

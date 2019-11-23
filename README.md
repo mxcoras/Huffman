@@ -21,7 +21,8 @@ $make
 ## Run
 
 ```shell
-$comp <filename> <compressed file name>
+$comp <filename> <compressed file name> #to compress file
+$extr <filename> <extracted file name> #to extract file
 ```
 
 - Data Set：<https://en.wikibooks.org/wiki/Special:Random>
