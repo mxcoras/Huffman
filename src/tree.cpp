@@ -47,6 +47,7 @@ void HuffmanTree::Generate(std::map<char, int> &chFreq)
 
 void HuffmanTree::Clear()
 {
+    //
 }
 
 void HuffmanTree::CharSet()

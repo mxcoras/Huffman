@@ -1,5 +1,5 @@
 /*
-*Version 0.3
+*Version 0.4
 *by Mx, Nov. 23
 */
 
@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
         std::string wrtName(argv[3]);
         std::string parameter(argv[1]);
         if (parameter == "comp")
-            Encode(fileName, wrtName);//报错
+            Encode(fileName, wrtName);
         else if (parameter == "extr")
             Decode(fileName, wrtName);
     }

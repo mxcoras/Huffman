@@ -7,7 +7,7 @@ void Encode(std::string fileName, std::string wrtName)
     load.open(fileName, std::ios::in);
     if (!load.is_open())
     {
-        std::cout << "Error opening file, exiting..." << std::endl;
+        std::cout << "Error opening file1, exiting..." << std::endl;
         system("PAUSE");
         exit(1);
     }
@@ -33,7 +33,7 @@ void Encode(std::string fileName, std::string wrtName)
     load.open(fileName);
     if (!write.is_open() || !load.is_open())
     {
-        std::cout << "Error opening file, exiting..." << std::endl;
+        std::cout << "Error opening file2, exiting..." << std::endl;
         system("PAUSE");
         exit(1);
     }
