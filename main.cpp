@@ -1,5 +1,5 @@
 /*
-*Version 0.1
+*Version 0.2
 *by Mx, Nov. 23
 */
 
@@ -9,7 +9,22 @@
 
 int main(int argc, char *argv[])
 {
-    std::cout << "test" << std::endl;
+    if (argc == 4)
+    {
+        std::string fileName = argv[2];
+        std::string wrtName = argv[3];
+        if (argv[1] == "comp")
+            Encode(fileName, wrtName);
+        else if (argv[1] == "extr")
+            Decode(fileName, wrtName);
+    }
+    else
+    {
+        std::cout << "Error parameter, exiting..." << std::endl;
+        Sleep(1000);
+        exit(1);
+    }
+    std::cout << "Success." << std::endl;
     system("PAUSE");
     return 0;
 }

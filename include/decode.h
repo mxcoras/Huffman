@@ -3,6 +3,6 @@
 
 #include"macro.h"
 
-
+void Decode(std::string fileName,std::string wrtName);
 
 #endif //__DECODE_H__
