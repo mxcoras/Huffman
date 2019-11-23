@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <cstring>
+#include <bitset>
 #include <vector>
 #include <map>
 

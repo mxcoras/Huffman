@@ -1,13 +1,19 @@
 /*
-*Version 0.4
+*Version 0.5
 *by Mx, Nov. 23
 */
 
 #include "include/encode.h"
 #include "include/decode.h"
 
+#define DEBUG
+//#define DEBUG_COMP//压缩调试
+#define DEBUG_EXTR//解压调试
+
 int main(int argc, char *argv[])
 {
+    #ifndef DEBUG
+
     if (argc == 4)
     {
         std::string fileName(argv[2]);
@@ -27,4 +33,25 @@ int main(int argc, char *argv[])
     std::cout << "Success." << std::endl;
     system("PAUSE");
     return 0;
+
+    #endif //DEBUG
+//---------------------
+    #ifdef DEBUG_COMP
+
+    Encode("test.txt","test.comp");
+    std::cout << "Success." << std::endl;
+    system("PAUSE");
+    return 0;
+
+    #endif //DEBUG_COMP
+//---------------------
+    #ifdef DEBUG_EXTR
+
+    Decode("test.comp","test.txt");
+    std::cout << "Success." << std::endl;
+    system("PAUSE");
+    return 0;
+
+    #endif //DEBUG_EXTR
+
 }

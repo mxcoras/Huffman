@@ -39,6 +39,8 @@ public:
     ~HuffmanTree();
     //返回字符集
     std::map<char, std::string> getChcode();
+    //返回根节点
+    HuffTreeNode *getRoot();
     //由map中各字符和其对应的频率生成哈夫曼树
     void Generate(std::map<char, int> &chFreq);
     //删除哈夫曼树

@@ -37,6 +37,23 @@ void Encode(std::string fileName, std::string wrtName)
         system("PAUSE");
         exit(1);
     }
+    write << "comp$ ";
+    auto iter = chFreq.begin();
+    while (iter != chFreq.end())
+    {
+        write << iter->first << " " << iter->second << " ";
+        iter++;
+        if (iter != chFreq.end())
+        {
+            write << "$ ";
+        }
+        else
+        {
+            write << "#@$ ";
+        }
+    }
+    write.close();
+    write.open(wrtName,std::ios::app | std::ios::binary);
     while (!load.eof())
     {
         load >> binary;
