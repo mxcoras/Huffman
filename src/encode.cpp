@@ -53,11 +53,11 @@ void Encode(std::string fileName, std::string wrtName)
         }
     }
     write.close();
-    write.open(wrtName,std::ios::app | std::ios::binary);
+    write.open(wrtName,std::ios::app);
     while (!load.eof())
     {
         load >> binary;
         auto iter = EncodeTree.getChcode().find(binary);
-        write << iter->first;
+        write << iter->second;
     }
 }

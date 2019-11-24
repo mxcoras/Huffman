@@ -48,7 +48,7 @@ public:
     //通过先序遍历，生成哈夫曼编码字符集
     void CharSet();
     //哈夫曼树的先序遍历
-    void PreOrder(HuffTreeNode *Node, std::map<char, std::string> &chCode, std::string &tmp, bool isLeft);
+    void PreOrder(HuffTreeNode *Node, std::string &tmp, bool isLeft);
 };
 
 #endif //__TREE_H__

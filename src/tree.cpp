@@ -42,8 +42,8 @@ void HuffmanTree::Generate(std::map<char, int> &chFreq)
     {
         std::sort(vecNode.begin(), vecNode.end(), cmpWeight);
         auto tmp = new HuffTreeNode(vecNode[0]->weight + vecNode[1]->weight);
-        auto leftChild = new HuffTreeNode(vecNode[0]->weight);
-        auto rightChild = new HuffTreeNode(vecNode[1]->weight);
+        auto leftChild = new HuffTreeNode(vecNode[0]->key,vecNode[0]->weight);
+        auto rightChild = new HuffTreeNode(vecNode[1]->key,vecNode[1]->weight);
         tmp->left = leftChild;
         tmp->right = rightChild;
         vecNode.erase(vecNode.begin(), vecNode.begin() + 2);
@@ -60,10 +60,10 @@ void HuffmanTree::Clear()
 void HuffmanTree::CharSet()
 {
     std::string tmp; //暂存的编码
-    PreOrder(root, chCode, tmp, true);
+    PreOrder(root, tmp, true);
 }
 
-void HuffmanTree::PreOrder(HuffTreeNode *Node, std::map<char, std::string> &chCode, std::string &tmp, bool isLeft)
+void HuffmanTree::PreOrder(HuffTreeNode *Node, std::string &tmp, bool isLeft)
 {
     if (Node == nullptr)
         return;
@@ -78,6 +78,6 @@ void HuffmanTree::PreOrder(HuffTreeNode *Node, std::map<char, std::string> &chCo
         chCode.insert(std::pair<char, std::string>(Node->key, tmp));
         tmp.pop_back();
     }
-    PreOrder(Node->left, chCode, tmp, true);
-    PreOrder(Node->right, chCode, tmp, false);
+    PreOrder(Node->left, tmp, true);
+    PreOrder(Node->right, tmp, false);
 }
