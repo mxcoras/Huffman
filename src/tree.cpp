@@ -6,6 +6,14 @@ bool cmpWeight(HuffTreeNode *data1, HuffTreeNode *data2)
     return data1->weight < data2->weight;
 }
 
+void copyNode(HuffTreeNode *a, HuffTreeNode *b)
+{
+    a->key = b->key;
+    a->weight = b->weight;
+    a->left = b->left;
+    a->right = b->right;
+}
+
 HuffmanTree::HuffmanTree(std::map<char, int> chFreq)
 {
     Generate(chFreq);
@@ -14,11 +22,6 @@ HuffmanTree::HuffmanTree(std::map<char, int> chFreq)
 
 HuffmanTree::~HuffmanTree()
 {
-}
-
-std::map<char, std::string> HuffmanTree::getChcode()
-{
-    return chCode;
 }
 
 HuffTreeNode *HuffmanTree::getRoot()
@@ -42,8 +45,10 @@ void HuffmanTree::Generate(std::map<char, int> &chFreq)
     {
         std::sort(vecNode.begin(), vecNode.end(), cmpWeight);
         auto tmp = new HuffTreeNode(vecNode[0]->weight + vecNode[1]->weight);
-        auto leftChild = new HuffTreeNode(vecNode[0]->key,vecNode[0]->weight);
-        auto rightChild = new HuffTreeNode(vecNode[1]->key,vecNode[1]->weight);
+        auto leftChild = new HuffTreeNode();
+        auto rightChild = new HuffTreeNode();
+        copyNode(leftChild, vecNode[0]);
+        copyNode(rightChild, vecNode[1]);
         tmp->left = leftChild;
         tmp->right = rightChild;
         vecNode.erase(vecNode.begin(), vecNode.begin() + 2);
@@ -76,8 +81,8 @@ void HuffmanTree::PreOrder(HuffTreeNode *Node, std::string &tmp, bool isLeft)
     if (Node->left == nullptr && Node->right == nullptr)
     {
         chCode.insert(std::pair<char, std::string>(Node->key, tmp));
-        tmp.pop_back();
     }
     PreOrder(Node->left, tmp, true);
     PreOrder(Node->right, tmp, false);
+    tmp.pop_back();
 }

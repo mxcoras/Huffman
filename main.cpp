@@ -1,5 +1,5 @@
 /*
-*Version 0.6
+*Version 0.7
 *by Mx, Nov. 24
 */
 
@@ -9,10 +9,11 @@
 #define DEBUG
 #define DEBUG_COMP//压缩调试
 //#define DEBUG_EXTR//解压调试
+//#define DEBUG_BOTH//综合调试
 
 int main(int argc, char *argv[])
 {
-    #ifndef DEBUG
+#ifndef DEBUG
 
     if (argc == 4)
     {
@@ -34,24 +35,37 @@ int main(int argc, char *argv[])
     system("PAUSE");
     return 0;
 
-    #endif //DEBUG
+#endif //DEBUG
 //---------------------
-    #ifdef DEBUG_COMP
+#ifdef DEBUG_COMP
 
-    Encode("test.txt","test.comp");
+    Encode("test.txt", "test.comp");
     std::cout << "Success." << std::endl;
     system("PAUSE");
     return 0;
 
-    #endif //DEBUG_COMP
+#endif //DEBUG_COMP
 //---------------------
-    #ifdef DEBUG_EXTR
+#ifdef DEBUG_EXTR
 
-    Decode("test.comp","test.txt");
+    Decode("test.comp", "test.txt");
     std::cout << "Success." << std::endl;
     system("PAUSE");
     return 0;
 
-    #endif //DEBUG_EXTR
+#endif //DEBUG_EXTR
+//---------------------
+#ifdef DEBUG_BOTH
 
+    std::string str;
+    std::cin >> str;
+    if (str=="comp")
+        Encode("test.txt", "test.comp");
+    else
+        Decode("test.comp", "test.txt");
+    std::cout << "Success." << std::endl;
+    system("PAUSE");
+    return 0;
+
+#endif //DEBUG_BOTH
 }

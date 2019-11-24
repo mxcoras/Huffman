@@ -13,7 +13,8 @@ void Decode(std::string fileName, std::string wrtName)
     }
     char binary;
     int freq;
-    std::string tmpstr;
+    std::bitset<8> bits;
+    std::string tmpstr, bitstr;
     std::map<char, int> chFreq;
     load >> tmpstr;
     if (tmpstr != "comp$")
@@ -30,6 +31,13 @@ void Decode(std::string fileName, std::string wrtName)
         chFreq.insert(std::map<char, int>::value_type(binary, freq));
         load >> tmpstr;
     } while (tmpstr != "#@$");
+    while (!load.eof()) //读取字符转化为01串
+    {
+        load.read(&binary, 1);
+        bits = binary; //字符赋值给bitset<8>可直接转化为二进制
+        bitstr += bits.to_string();
+    }
+    load.close();
     HuffmanTree EncodeTree(chFreq);
     std::ofstream write;
     write.open(wrtName);
@@ -40,12 +48,17 @@ void Decode(std::string fileName, std::string wrtName)
         exit(1);
     }
     HuffTreeNode *Node = EncodeTree.getRoot();
-    while (!load.eof())
+    std::string end = bitstr.substr(bitstr.size() - 16, 16); //处理末尾不够八位的情况
+    std::bitset<8> loc(end, 8, 16);
+    unsigned long add = loc.to_ulong();
+    end = end.substr(8 - add, add);
+    bitstr.erase(bitstr.size() - 16, bitstr.size());
+    bitstr += end;
+    for(auto i : bitstr)
     {
-        load >> binary;
-        if (binary == '\000')
+        if (i == '0')
             Node = Node->left;
-        else if (binary == '\001')
+        else if (i == '1')
             Node = Node->right;
         if (Node->left == nullptr && Node->right == nullptr)
         {
@@ -53,4 +66,5 @@ void Decode(std::string fileName, std::string wrtName)
             Node = EncodeTree.getRoot();
         }
     }
+    write.close();
 }

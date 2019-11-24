@@ -16,6 +16,8 @@ void Encode(std::string fileName, std::string wrtName)
     while (!load.eof())
     {
         load >> binary;
+        if (load.eof())
+            break;
         auto iter = chFreq.find(binary);
         if (iter != chFreq.end())
         {
@@ -29,7 +31,7 @@ void Encode(std::string fileName, std::string wrtName)
     load.close();
     HuffmanTree EncodeTree(chFreq);
     std::ofstream write;
-    write.open(wrtName);
+    write.open(wrtName, std::ios::binary);
     load.open(fileName);
     if (!write.is_open() || !load.is_open())
     {
@@ -52,12 +54,27 @@ void Encode(std::string fileName, std::string wrtName)
             write << "#@$ ";
         }
     }
-    write.close();
-    write.open(wrtName,std::ios::app);
+    std::string bitstr;
     while (!load.eof())
     {
         load >> binary;
-        auto iter = EncodeTree.getChcode().find(binary);
-        write << iter->second;
+        if (load.eof())
+            break;
+        auto iter = EncodeTree.chCode.find(binary);
+        bitstr += iter->second;
     }
+    while (bitstr.size() >= 8)
+    {
+        std::bitset<8> bits(bitstr, 0, 8);
+        bitstr.erase(0, 8);
+        write << static_cast<char>(bits.to_ulong());
+    }
+    if (!bitstr.empty())
+    {
+        unsigned long loc = bitstr.size();
+        std::bitset<8> endbits(bitstr,0,loc);
+        write << static_cast<char>(endbits.to_ulong());
+        write << static_cast<char>(loc);
+    }
+    write.close();
 }

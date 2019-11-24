@@ -6,6 +6,8 @@
 //哈夫曼树节点
 typedef struct HuffTreeNode
 {
+    //默认构造函数
+    HuffTreeNode(){}
     //叶子节点构造函数
     HuffTreeNode(char k, int w) : key(k), weight(w),
                                   left(nullptr),
@@ -30,15 +32,12 @@ class HuffmanTree
 private:
     //哈夫曼树的根节点
     HuffTreeNode *root;
-    std::map<char, std::string> chCode;
 
 public:
     //哈夫曼树的构造函数
     HuffmanTree(std::map<char, int> chFreq);
     //哈夫曼树的析构函数
     ~HuffmanTree();
-    //返回字符集
-    std::map<char, std::string> getChcode();
     //返回根节点
     HuffTreeNode *getRoot();
     //由map中各字符和其对应的频率生成哈夫曼树
@@ -49,6 +48,8 @@ public:
     void CharSet();
     //哈夫曼树的先序遍历
     void PreOrder(HuffTreeNode *Node, std::string &tmp, bool isLeft);
+    //字符集
+    std::map<char, std::string> chCode;
 };
 
 #endif //__TREE_H__
