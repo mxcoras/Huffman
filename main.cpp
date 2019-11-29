@@ -1,15 +1,15 @@
 /*
-*Version 0.8
-*by Mx, Nov. 24
+*Version 1.0
+*by Mx, Nov. 30
 */
 
 #include "include/encode.h"
 #include "include/decode.h"
 
-#define DEBUG
+//#define DEBUG
 //#define DEBUG_COMP//压缩调试
 //#define DEBUG_EXTR//解压调试
-#define DEBUG_BOTH//综合调试
+//#define DEBUG_BOTH//综合调试
 
 int main(int argc, char *argv[])
 {

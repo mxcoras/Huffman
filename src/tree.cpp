@@ -64,7 +64,6 @@ void HuffmanTree::Clear()
 
 void HuffmanTree::CharSet()
 {
-    std::string tmp; //暂存的编码
     PreOrder(root, tmp, true);
 }
 

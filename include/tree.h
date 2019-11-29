@@ -32,6 +32,8 @@ class HuffmanTree
 private:
     //哈夫曼树的根节点
     HuffTreeNode *root;
+    //暂存的编码
+    std::string tmp; 
 
 public:
     //哈夫曼树的构造函数
