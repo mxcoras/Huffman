@@ -1,5 +1,6 @@
 build/
 debug/
 .vscode/
-.comp
-.txt
+*.comp
+*.txt
+!CMakeLists.txt

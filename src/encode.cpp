@@ -63,6 +63,9 @@ void Encode(std::string fileName, std::string wrtName)
         auto iter = EncodeTree.chCode.find(binary);
         bitstr += iter->second;
     }
+    //
+    int lastValid=bitstr.size()%8;
+    write << lastValid << " ";
     while (bitstr.size() >= 8)
     {
         std::bitset<8> bits(bitstr, 0, 8);
@@ -73,8 +76,9 @@ void Encode(std::string fileName, std::string wrtName)
     {
         unsigned long loc = bitstr.size();
         std::bitset<8> endbits(bitstr,0,loc);
+        std::cout<<static_cast<char>(endbits.to_ulong());
         write << static_cast<char>(endbits.to_ulong());
-        write << static_cast<char>(loc);
+    //    write << static_cast<char>(loc);
     }
     write.close();
 }

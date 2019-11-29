@@ -31,12 +31,16 @@ void Decode(std::string fileName, std::string wrtName)
         chFreq.insert(std::map<char, int>::value_type(binary, freq));
         load >> tmpstr;
     } while (tmpstr != "#@$");
+    int lastValid;
+    load>>lastValid;
+    load.read(&binary, 1);
     while (!load.eof()) //读取字符转化为01串
     {
         load.read(&binary, 1);
         bits = binary; //字符赋值给bitset<8>可直接转化为二进制
         bitstr += bits.to_string();
     }
+    bitstr=bitstr.substr(0,bitstr.size()-8);
     load.close();
     HuffmanTree EncodeTree(chFreq);
     std::ofstream write;
@@ -48,11 +52,11 @@ void Decode(std::string fileName, std::string wrtName)
         exit(1);
     }
     HuffTreeNode *Node = EncodeTree.getRoot();
-    std::string end = bitstr.substr(bitstr.size() - 16, 16); //处理末尾不够八位的情况
-    std::bitset<8> loc(end, 8, 16);
+    std::string end = bitstr.substr(bitstr.size() - 8, 8); //处理末尾不够八位的情况
+    std::bitset<8> loc(end);
     unsigned long add = loc.to_ulong();
-    end = end.substr(8 - add, add);
-    bitstr.erase(bitstr.size() - 16, bitstr.size());
+    end = end.substr(8 - lastValid, lastValid);
+    bitstr.erase(bitstr.size() - 8, bitstr.size());
     bitstr += end;
     for(auto i : bitstr)
     {
